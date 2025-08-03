@@ -5,4 +5,4 @@ Sonolus SCP Uploader 😏
 - Python >= 3.10
 - Cloudflare R2
 
-I will write a how to setup
+I will write how to setup
