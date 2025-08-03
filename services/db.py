@@ -2,8 +2,6 @@ import asyncpg
 
 from .env import Env
 
-dotenv.load_dotenv()
-
 class DBService:
     pool: asyncpg.Pool = None
     
