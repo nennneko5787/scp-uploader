@@ -2,3 +2,6 @@ fastapi[all]
 aioboto3
 asyncpg
 python-dotenv
+alembic
+cryptography
+aioredis

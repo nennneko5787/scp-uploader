@@ -1,0 +1,9 @@
+{
+    "server.info.title": {
+        "en": "SCP Uploader login server"
+    },
+    "server.info.description": {
+        "en": "Login server for SCP uploader.",
+        "ja": "SCPアップローダーのログイン用サーバー。"
+    }
+}
