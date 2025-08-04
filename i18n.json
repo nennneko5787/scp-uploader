@@ -5,5 +5,13 @@
     "server.info.description": {
         "en": "Login server for SCP uploader.",
         "ja": "SCPアップローダーのログイン用サーバー。"
+    },
+    "server.info.nowLogined": {
+        "en": "You are logged in as {name}.",
+        "ja": "{name} としてログインしています。"
+    },
+    "server.info.yourAuthCode": {
+        "en": "Your auth code is {authCode}. This authentication code will expire in 5 minutes.",
+        "ja": "あなたの認証コードは {authCode} です。この認証コードは5分で失効します。"
     }
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    {% block head %}
+    <!-- META -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{title}} | SCP Uploader</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+
+    <!-- JS -->
+    <script src="/static/js/cookies.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://scp-uploader.f5.si"> SCP Uploader </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/new"> 新着 </a>
+
+          <a class="navbar-item" href="/popular"> 人気のSCPファイル </a>
+
+          <a class="navbar-item" href="/search"> 検索 </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> その他 </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item"> SCPファイルついて </a>
+              <a class="navbar-item"> このサイトについて </a>
+              <hr class="navbar-divider" />
+              <a class="navbar-item"> 著作権の侵害を報告 </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            {% if user is none %}
+            <div class="buttons">
+              <a class="button is-primary" href="/login"> <b> ログイン </b> </a>
+            </div>
+            {% else %}
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link"> {{ user.name }}#{{ user.handle }} </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="/users/{{ user.id }}"> マイページ </a>
+                <a class="navbar-item" href="/upload"> SCPファイルアップロード </a>
+                <a class="navbar-item"> アカウント設定 </a>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="/logout"> ログアウト </a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block body %} {% endblock %}
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p><strong>SCP Uploader</strong> by <a href="https://nennneko5787.net">nennneko5787</a>.</p>
+      </div>
+    </footer>
+  </body>
+</html>

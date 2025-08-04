@@ -1,0 +1,17 @@
+{% extends "ja/base.html" %} {% set title = targetUser.name + "#" + targetUser.handle %} {% block head %} {{ super() }}
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">{{ targetUser.name }}#{{ targetUser.handle}}</h1>
+    <p class="subtitle">{{targetUser.aboutMe}}</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-quarters"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

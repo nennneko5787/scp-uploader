@@ -1,0 +1,59 @@
+{% extends "ja/base.html" %} {% set title = file.name+"の編集" %} {% block head %} {{ super() }}
+<script src="/static/js/edit.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">{{file.name}} の編集</h1>
+    <p class="subtitle">アップロードしたファイルを編集・削除することができます。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div id="notifications" style="padding-bottom: 10px"></div>
+
+    <div class="form">
+      <div class="field">
+        <label class="label" for="name">タイトル</label>
+        <div class="control">
+          <input class="input" type="text" id="name" minlength="1" maxlength="60" value="{{file.name}}" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="tag">タグ</label>
+        <div class="tags" id="tags"></div>
+        <div class="field has-addons">
+          <p class="control is-expanded">
+            <input class="input" type="text" id="tag" />
+          </p>
+          <p class="control">
+            <button class="button is-primary" id="submit-tag">追加</button>
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="description">説明</label>
+        <textarea class="textarea" id="description">{{file.description}}</textarea>
+      </div>
+
+      <div class="field">
+        <button class="button is-primary is-fullwidth" id="submit">編集</button>
+      </div>
+
+      <div class="field" style="padding-top: 50px">
+        <button class="button is-danger is-fullwidth" id="delete">削除</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const fileId = `{{file.id}}`;
+
+  {% for tag in file.tags %}
+  addTag("{{tag}}");
+  {% endfor %}
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "ja/base.html" %} {% set title = "ログイン" %} {% block head %} {{ super() }}
+<script src="/static/js/login.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">ログイン</h1>
+    <p class="subtitle">Sonolusアカウントを使用して、SCP Uploaderにログインします。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div id="notifications" style="padding-bottom: 10px"></div>
+
+    <div class="content">
+      <h4>ログイン方法</h4>
+      <p>
+        Sonolusで <code>https://scp-uploader.f5.si</code> というサーバーを追加します。
+        <a href="https://open.sonolus.com/scp-uploader.f5.si">このリンクを押せば簡単に追加できます。</a>
+      </p>
+      <p>次に <code>SCP Uploader login server</code> が開けたら、そのサーバーにログインします。</p>
+      <p>最後に 認証コードが表示されるので、下の入力欄に入力してログインボタンを押します。</p>
+    </div>
+
+    <form class="form" id="form">
+      <div class="field">
+        <label class="label">認証コード</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="authCode"
+            placeholder="6桁の英数字"
+            pattern="[a-zA-Z0-9]{6}"
+            minlength="6"
+            maxlength="6"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <button class="button is-primary is-fullwidth" type="submit" name="submit">ログイン</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

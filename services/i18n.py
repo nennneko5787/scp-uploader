@@ -11,7 +11,7 @@ class I18n:
         i18nTable = json.load(f)
 
     @classmethod
-    def get(cls, key: str, localization: Localization) -> str:
+    def get(cls, key: str, localization: Localization, *args, **kwargs) -> str:
         langs = cls.i18nTable.get(key, None)
 
         if not langs:
@@ -24,4 +24,4 @@ class I18n:
                 f'I18n table "{key}" is not found (Because default locale is not set).'
             )
 
-        return langs.get(localization, default)
+        return langs.get(localization, default).format(*args, **kwargs)

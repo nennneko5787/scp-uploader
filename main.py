@@ -1,7 +1,10 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
+from routes import pages
+from routes.api import auth, files, upload, views
 from routes.sonolus import auth as sonolusAuth
 from routes.sonolus import info as sonolusInfo
 from services.db import DBService
@@ -22,5 +25,12 @@ app = FastAPI(
     swagger_ui_oauth2_redirect_url=None,
 )
 
+app.mount("/static", StaticFiles(directory="static"), "static")
+
 app.include_router(sonolusInfo.router)
 app.include_router(sonolusAuth.router)
+app.include_router(pages.router)
+app.include_router(auth.router)
+app.include_router(files.router)
+app.include_router(upload.router)
+app.include_router(views.router)

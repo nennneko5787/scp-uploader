@@ -1,0 +1,70 @@
+{% extends "ja/base.html" %} {% set title = file.name %} {% block head %} {{ super() }}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<link rel="stylesheet" href="/static/css/file.css" /> {% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">{{ file.name }}</h1>
+    <div class="flex">
+      <div><i class="fa-solid fa-eye"></i> {{ file.views }}</div>
+      <div><i class="fa-solid fa-download"></i> {{ file.downloads }}</div>
+    </div>
+    <p><i class="fa-solid fa-user"></i> <code>{{ file.author.name }}#{{ file.author.handle }}</code></p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <div class="content">
+          <p>
+            {{file.description | replace("\r\n", "<br />") | replace("\r", "<br />") | replace("\n", "<br />") | safe}}
+          </p>
+          <hr />
+          <div class="box">
+            <p>オリジナルのコレクション名: <code>{{file.title}}</code></p>
+            <p>ファイルサイズ: <code>{{file.size | truncate2}}MB</code></p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box buttons">
+          <a class="button is-primary is-fullwidth" href="/files/{{file.id}}/download"
+            ><i class="fa-solid fa-download"></i> ダウンロード</a
+          >
+          <a
+            class="button is-x is-fullwidth"
+            href="http://twitter.com/share?url=https://scp-uploader.f5.si/files/{{file.id}}&text={{file.name}} というSCPファイルを発見しました！Sonolusで遊びましょう！"
+            ><i class="fa-brands fa-x-twitter"></i> でシェア</a
+          >
+          {% if user.id == file.author.id %}
+          <a class="button is-info is-fullwidth" href="/files/{{file.id}}/edit"
+            ><i class="fa-solid fa-pen-to-square"></i> 編集</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cf-container"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+      window.turnstile.render("#cf-container", {
+        sitekey: "0x4AAAAAABoMxevN1H7j4mK7",
+        size: "invisible",
+        callback: async function (token) {
+          await fetch(`/api/mikurinlen/{{file.id}}`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ gumimegu: token }),
+          });
+        },
+      });
+    }, 3000);
+  });
+</script>
+{% endblock %}

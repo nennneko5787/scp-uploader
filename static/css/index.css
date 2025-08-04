@@ -1,0 +1,26 @@
+h3.file-title {
+  margin-bottom: 5px;
+}
+
+.columns.files {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tags {
+  padding-top: 5px;
+}
+
+.is-right {
+  text-align: right;
+}
+
+.tags {
+  justify-content: right;
+}
+
+.flex {
+  display: flex;
+  justify-content: right;
+  gap: 5px;
+}

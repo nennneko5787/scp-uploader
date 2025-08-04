@@ -1,17 +1,11 @@
-from typing import List
+from pydantic import BaseModel, ConfigDict
+from pydantic.alias_generators import to_snake
 
-from pydantic import BaseModel
 
-
-class ServiceUserProfile(BaseModel):
+class User(BaseModel):
     id: str
     handle: str
     name: str
-    avatarType: str
-    avatarForegroundType: str
-    avatarForegroundColor: str
-    avatarBackgroundType: str
-    avatarBackgroundColor: str
-    bannerType: str
     aboutMe: str
-    favorites: List[str]
+
+    model_config = ConfigDict(alias_generator=to_snake)
