@@ -5,4 +5,4 @@ python-dotenv
 alembic
 cryptography
 redis
-psycopg2
+psycopg2-binary
