@@ -1,0 +1,38 @@
+{% extends "en/base.html" %} {% set title = "About This Site" %} {% set description = "An explanation and FAQ about this
+site." %} {% block head %} {{ super() }} {% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">About This Site</h1>
+    <p class="subtitle">An explanation and FAQ about this site.</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <h2>Description of This Site</h2>
+      <p>
+        After <a href="https://cc.sevenc7c.com/">Chart Cyanvas</a> shut down and custom charts became temporarily
+        inaccessible, I thought it would be a problem if there wasn’t a site where you could play charts offline. So, I
+        created this site in about three days <small style="font-size: 30%">(both the code and the pages)</small>.<br />
+        <s>Some missing features are just the result of the "three-day quality."</s><br />
+        I will continue adding more features over time.
+      </p>
+      <h2>FAQ</h2>
+      <h3>I want to know the server specs</h3>
+      <p>
+        It’s running on an XServer Free VPS (4GB).
+        <a
+          href="https://vps.xserver.ne.jp/free.php#:~:text=%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%99%E3%80%82-,%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3,-%E7%84%A1%E6%96%99VPS"
+          >You can check the specs here.</a
+        >
+      </p>
+      <h3>This site is infringing on my/our copyright...</h3>
+      <p>
+        From the menu above, select “Other” → “Report Copyright Infringement” and send an email. I will respond within
+        24 hours.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

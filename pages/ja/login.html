@@ -1,4 +1,5 @@
-{% extends "ja/base.html" %} {% set title = "ログイン" %} {% block head %} {{ super() }}
+{% extends "ja/base.html" %} {% set title = "ログイン" %} {% set description = "Sonolusアカウントを使用して、SCP
+Uploaderにログインします。" %} {% block head %} {{ super() }}
 <script src="/static/js/login.js"></script>
 {% endblock %} {% block body %}
 <section class="hero is-medium is-link">
@@ -41,6 +42,10 @@
       <div class="field">
         <button class="button is-primary is-fullwidth" type="submit" name="submit">ログイン</button>
       </div>
+
+      <blockquote>
+        アカウントにログインした時点で、<a href="/terms">当サービスの利用規約</a>に同意したものとみなします。
+      </blockquote>
     </form>
   </div>
 </div>

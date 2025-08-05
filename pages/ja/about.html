@@ -1,0 +1,37 @@
+{% extends "ja/base.html" %} {% set title = "このサイトについて" %} {% set description =
+"このサイトについての説明やFAQをまとめています。" %} {% block head %} {{ super() }} {% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">このサイトについて</h1>
+    <p class="subtitle">このサイトについての説明やFAQをまとめています。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <h2>このサイトについての説明</h2>
+      <p>
+        <a href="https://cc.sevenc7c.com/">Chart Cyanvas</a
+        >がお亡くなりになり、創作譜面へ一時的にアクセス不能になったことで、オフラインで譜面が遊べるサイトを作らないとまずいのではないかと思った私が3日ぐらいで書き上げた<small
+          style="font-size: 30%"
+          >(コードもページも)</small
+        >サイトです。<br />
+        <s>ところどころ機能が足りないのは3日クォリティーだからです。</s><br />機能はどんどん追加していきます。
+      </p>
+      <h2>FAQ</h2>
+      <h3>サーバーのスペックが知りたい</h3>
+      <p>
+        XServer 無料VPS (4GB) です。<a
+          href="https://vps.xserver.ne.jp/free.php#:~:text=%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%99%E3%80%82-,%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3,-%E7%84%A1%E6%96%99VPS"
+          >ここを見ればスペックが分かります。</a
+        >
+      </p>
+      <h3>このサイトが私/弊社の著作権を侵害しているのですが...</h3>
+      <p>
+        上にあるメニューより「その他」→「著作権の侵害を報告」を選択し、メールを送信してください。24時間以内に対応します。
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "en/base.html" %} {% set title = "About SCP files" %} {% set description = "This is an explanation of SCP
+files." %} {% block head %} {{ super() }} {% endblock %} {% block body %}
+
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">About SCP files</h1>
+    <p class="subtitle">This is an explanation of SCP files.</p>
+  </div>
+</section>
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <h2>What is an SCP file?</h2>
+      <p>
+        An SCP file is a <b>S</b>onolus <b>C</b>ollection <b>P</b>ackage file, which is a package file containing a
+        Sonolus collection.
+      </p>
+      <h2>How to create an SCP file</h2>
+      <blockquote>
+        The information on this page is based on Sonolus v1.0.0. Please note that the information may be outdated.
+      </blockquote>
+      <ol>
+        <li>If you have not yet created a collection, create one first.</li>
+        <li>Launch Sonolus, select “Play,” and choose the collection you want to package.</li>
+        <li>Select “Export.”</li>
+        <li>
+          Choose the mode. When uploading to this site, we recommend exporting in <b>Full</b> mode (although this will
+          increase the file size...).
+        </li>
+        <li>Press the export button to start exporting.</li>
+        <li>
+          During the process, a screen will appear asking you to select a folder to save the file in. Choose any folder
+          and save.
+        </li>
+        <li>
+          When the export completes successfully, a message saying
+          <b style="background-color: #32cd32; color: white">Package exported.</b> will be displayed.
+        </li>
+      </ol>
+      <h2>Can I convert a USC file into an SCP file?</h2>
+      <p>I am currently working on a page for that. It will be released soon.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

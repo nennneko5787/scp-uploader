@@ -16,6 +16,10 @@ h3.file-title {
   padding-top: 5px;
 }
 
+.is-right {
+  text-align: right;
+}
+
 .flex {
   display: flex;
   justify-content: right;

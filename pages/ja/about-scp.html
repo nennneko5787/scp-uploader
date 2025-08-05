@@ -1,0 +1,60 @@
+{% extends "ja/base.html" %} {% set title = "SCPファイルについて" %} {% set description =
+"SCPファイルについての説明です。" %} {% block head %} {{ super() }} {% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">SCPファイルについて</h1>
+    <p class="subtitle">SCPファイルについての説明です。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <h2>SCPファイルとは</h2>
+      <p>
+        <ruby>
+          <b>S</b>onolus
+          <rp>(</rp>
+          <rt>ソノラス</rt>
+          <rp>)</rp>
+        </ruby>
+        <ruby>
+          <b>C</b>ollection
+          <rp>(</rp>
+          <rt>コレクション</rt>
+          <rp>)</rp>
+        </ruby>
+        <ruby>
+          <b>P</b>ackage
+          <rp>(</rp>
+          <rt>パッケージ</rt>
+          <rp>)</rp>
+        </ruby>
+        ファイルのことで、Sonolusのコレクションを<ruby>パッケージ<rp>(</rp><rt>ファイル</rt><rp>)</rp></ruby
+        >化したものです。
+      </p>
+      <h2>SCPファイルの作成方法</h2>
+      <blockquote>
+        本ページの情報は、Sonolus v1.0.0時点のものです。情報が古くなっている場合があります。ご了承ください。
+      </blockquote>
+      <ol>
+        <li>まず、コレクションを作成していない場合は適当に作成します。</li>
+        <li>Sonolus起動後、プレイを選択し、パッケージ化したいコレクションを選択します。</li>
+        <li>エクスポートを選択します。</li>
+        <li>
+          モードを選択します。本サイトでアップロードする際は<b>フル</b>モードでエクスポートすることをおすすめしています。(その分ファイルサイズは増加しますが...)
+        </li>
+        <li>エクスポートボタンを押すと、エクスポートが始まります。</li>
+        <li>途中で保存するフォルダーを選択する画面が出てくるので、適当に選択して保存します。</li>
+        <li>
+          正常にエクスポートが終わると、<b style="background-color: #32cd32; color: white"
+            >パッケージを書き出しました。</b
+          >と表示されます。
+        </li>
+      </ol>
+      <h2>USCファイルをSCPファイルにできますか？</h2>
+      <p>現在私はそのためのページを作成中です。近日公開予定です。</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

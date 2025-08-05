@@ -43,7 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const nameInput = document.getElementById("name");
   const descriptionInput = document.getElementById("description");
+  const publicCheckbox = document.getElementById("public");
   const submitButton = document.getElementById("submit");
+
+  const deleteButton = document.getElementById("delete");
 
   tagInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -62,6 +65,52 @@ document.addEventListener("DOMContentLoaded", () => {
     addTag(tagString);
   });
 
+  deleteButton.addEventListener("click", async () => {
+    deleteButton.classList.add("is-loading");
+    deleteButton.disabled = true;
+
+    if (!confirm("ファイルを削除すると、サーバーからファイルのデータが削除されます。\nよろしいですか？")) {
+      deleteButton.classList.remove("is-loading");
+      deleteButton.disabled = false;
+
+      return;
+    }
+
+    const response = await fetch(`/api/files/${fileId}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    });
+    const jsonData = await response.json();
+
+    deleteButton.classList.remove("is-loading");
+    deleteButton.disabled = false;
+
+    if (response.status != 200) {
+      notifications.innerHTML = `<div class="notification is-danger"><button class="delete"></button>${jsonData.detail}</div>`;
+      (document.querySelectorAll(".notification .delete") || []).forEach(($delete) => {
+        const $notification = $delete.parentNode;
+
+        $delete.addEventListener("click", () => {
+          $notification.parentNode.removeChild($notification);
+        });
+      });
+      return;
+    }
+
+    notifications.innerHTML = `<div class="notification is-success"><button class="delete"></button>削除しました。</div>`;
+    (document.querySelectorAll(".notification .delete") || []).forEach(($delete) => {
+      const $notification = $delete.parentNode;
+
+      $delete.addEventListener("click", () => {
+        $notification.parentNode.removeChild($notification);
+      });
+    });
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 3000);
+  });
+
   submitButton.addEventListener("click", async () => {
     submitButton.classList.add("is-loading");
     submitButton.disabled = true;
@@ -73,7 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const response = await fetch(`/api/files/${fileId}/edit`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name: nameInput.value, description: descriptionInput.value, tags: tags }),
+      body: JSON.stringify({
+        name: nameInput.value,
+        description: descriptionInput.value,
+        tags: tags,
+        public: publicCheckbox.checked,
+      }),
     });
     const jsonData = await response.json();
 

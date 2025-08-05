@@ -1,0 +1,58 @@
+{% extends "ja/base.html" %} {% set title = "検索" %} {% set description = "SCPファイルを検索することができます。" %} {%
+block head %} {{ super() }}
+<link rel="stylesheet" href="/static/css/index.css" />
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">検索</h1>
+    <p class="subtitle">SCPファイルを検索することができます。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <form class="box" method="get">
+        <div class="field">
+          <label for="query" class="label">検索ワード</label
+          ><input type="text" class="input" name="query" value="{{query}}" />
+        </div>
+        <div class="field"><button class="button is-primary" type="submit">検索</button></div>
+      </form>
+
+      <h2>検索結果</h2>
+      <div class="columns files">
+        {% for file in files %}
+        <a class="column box is-half" href="/files/{{file.id}}">
+          <h3 class="file-title">{{file.name}}</h3>
+          <div class="flex">
+            <div>
+              <i class="fa-solid fa-eye{% if not file.public %}-slash{% endif %}"></i>
+              <span> {{file.views}}</span>
+            </div>
+            <div><i class="fa-solid fa-download"></i><span> {{file.downloads}}</span></div>
+          </div>
+          <div class="is-right">
+            <i class="fa-solid fa-user"></i>
+            <code>{{file.author.name}}#{{file.author.handle}}</code>
+          </div>
+          <div class="tags">
+            {% for tag in tags %}
+            <div class="tag is-primary">{{tag}}</div>
+            {% endfor %}
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% if query is not none %}
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <a class="button pagination-previous {% if page <= 1 %}is-disabled{%endif%}" {% if page>
+          1 %}href="?query={{query}}&page={{page-1}}"{%endif%} >前</a
+        >
+        <a class="button pagination-next" href="?query={{query}}&page={{page+1}}">次</a>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

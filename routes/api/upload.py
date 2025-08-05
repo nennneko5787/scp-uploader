@@ -5,6 +5,7 @@ import zipfile
 from io import BytesIO
 
 import aioboto3
+import httpx
 from fastapi import APIRouter, Depends, Form, HTTPException, Response, UploadFile
 from fastapi import File as FileFunc
 
@@ -25,10 +26,23 @@ async def upload(
     name: str = Form(),
     description: str = Form(),
     tags: str = Form(),
+    public: bool = Form(),
+    mikulen: str = Form(),
     file: UploadFile = FileFunc(),
     user: User = Depends(verifyUser),
 ):
     response.status_code = 201
+
+    tsres = await httpx.AsyncClient().post(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        json={
+            "secret": Env.get("ts_secret"),
+            "response": mikulen,
+        },
+    )
+    jsonData = tsres.json()
+    if not jsonData["success"]:
+        raise HTTPException(400, "Failed to solve CAPTCHA")
 
     if file.size >= MAX_FILE_SIZE:
         raise HTTPException(413, "Files must not exceed 20MB.")
@@ -74,8 +88,8 @@ async def upload(
     row = dict(
         await DBService.pool.fetchrow(
             """
-                INSERT INTO files (id, author_id, name, description, tags, title, size)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                INSERT INTO files (id, author_id, name, description, tags, title, size, public)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                 RETURNING *
             """,
             fileId,
@@ -85,6 +99,7 @@ async def upload(
             tags,
             title,
             file.size / (1024 * 1024),
+            public,
         )
     )
     row["author"] = user.model_dump(by_alias=True)

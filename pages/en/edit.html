@@ -1,11 +1,11 @@
-{% extends "ja/base.html" %} {% set title = file.name+"の編集" %} {% set description =
-"アップロードしたファイルを編集・削除することができます。" %} {% block head %} {{ super() }}
+{% extends "en/base.html" %} {% set title = "Edit " + file.name %} {% set description = "You can edit or delete the
+uploaded file." %} {% block head %} {{ super() }}
 <script src="/static/js/edit.js"></script>
 {% endblock %} {% block body %}
 <section class="hero is-medium is-link">
   <div class="hero-body">
-    <h1 class="title is-1">{{file.name}} の編集</h1>
-    <p class="subtitle">アップロードしたファイルを編集・削除することができます。</p>
+    <h1 class="title is-1">Edit {{file.name}}</h1>
+    <p class="subtitle">You can edit or delete the uploaded file.</p>
   </div>
 </section>
 
@@ -15,43 +15,43 @@
 
     <div class="form">
       <div class="field">
-        <label class="label" for="name">タイトル</label>
+        <label class="label" for="name">Title</label>
         <div class="control">
           <input class="input" type="text" id="name" minlength="1" maxlength="60" value="{{file.name}}" />
         </div>
       </div>
 
       <div class="field">
-        <label class="label" for="tag">タグ</label>
+        <label class="label" for="tag">Tags</label>
         <div class="tags" id="tags"></div>
         <div class="field has-addons">
           <p class="control is-expanded">
             <input class="input" type="text" id="tag" minlength="1" maxlength="60" />
           </p>
           <p class="control">
-            <button class="button is-primary" id="submit-tag">追加</button>
+            <button class="button is-primary" id="submit-tag">Add</button>
           </p>
         </div>
       </div>
 
       <div class="field">
-        <label class="label" for="description">説明</label>
+        <label class="label" for="description">Description</label>
         <textarea class="textarea" id="description" minlength="1" maxlength="600">{{file.description}}</textarea>
       </div>
 
       <div class="field">
         <label class="checkbox">
-          <input type="checkbox" id="public" {%if file.public %}checked{%endif%} />
-          公開
+          <input type="checkbox" id="public" {% if file.public %}checked{% endif %} />
+          Public
         </label>
       </div>
 
       <div class="field">
-        <button class="button is-primary is-fullwidth" id="submit">編集</button>
+        <button class="button is-primary is-fullwidth" id="submit">Save Changes</button>
       </div>
 
       <div class="field" style="padding-top: 50px">
-        <button class="button is-danger is-fullwidth" id="delete">削除</button>
+        <button class="button is-danger is-fullwidth" id="delete">Delete</button>
       </div>
     </div>
   </div>

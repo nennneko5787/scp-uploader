@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from objects import User
 from services.auth import verifyUser
 from services.files import (
+    delete,
     edit,
     get,
     getFilesByDownloads,
@@ -36,6 +37,7 @@ class EditRequest(BaseModel):
     name: str
     description: str
     tags: List[str]
+    public: bool
 
 
 @router.patch("/api/files/{fileId:str}/edit")
@@ -45,4 +47,14 @@ async def editFile(model: EditRequest, fileId: str, user: User = Depends(verifyU
     if user.id != file.author.id:
         raise HTTPException(403, "Forbidden")
 
-    await edit(file.id, model.name, model.description, model.tags)
+    await edit(file.id, model.name, model.description, model.tags, model.public)
+
+
+@router.delete("/api/files/{fileId:str}")
+async def deleteFile(fileId: str, user: User = Depends(verifyUser)):
+    file = await get(fileId)
+
+    if user.id != file.author.id:
+        raise HTTPException(403, "Forbidden")
+
+    await delete(file)

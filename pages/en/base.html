@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     {% block head %}
     <!-- META -->
@@ -13,7 +13,7 @@
     <meta name="keywords" content="{%block tags%}Sonolus,ソノラス,創作譜面{%endblock%}" />
     <meta name="robots" content="index, follow" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="language" content="Japanese" />
+    <meta name="language" content="English" />
 
     <!-- OGP -->
     <meta property="og:title" content="{{ title }}" />
@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://scp-uploader.f5.si/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SCP Uploader" />
-    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
@@ -42,7 +42,7 @@
       document.addEventListener("DOMContentLoaded", () => {
         const legal = document.getElementById("legal");
         legal.href =
-          "mailto:39kawaii@scp-uploader.f5.si?subject=著作権の侵害について&body=以下の内容をメールに記載してください。%0D%0A%0D%0A1.%20著作権侵害の対象となるコンテンツのURL（SCPファイルのURL）を明記すること。%0D%0A2.%20そのURLが著作権を侵害していると判断した理由を簡潔に説明すること。%0D%0A3.%20著作物を管理しているのが、権利者本人の会社なのか、または委託を受けた管理会社なのかを明記すること。";
+          "mailto:39kawaii@scp-uploader.f5.si?subject=Copyright infringement&body=Please include the following information in your email.%0D%0A%0D%0A1.%20Specify the URL of the content that is subject to copyright infringement (URL of the SCP file).%0D%0A2.%20Briefly explain why you believe the URL infringes copyright.%0D%0A3.%20Clearly state whether the copyrighted works are managed by the rights holder's company or by a management company entrusted with that task.";
       });
     </script>
     {% endblock %}
@@ -62,36 +62,36 @@
 
       <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="/new"> 新着 </a>
+          <a class="navbar-item" href="/new"> New </a>
 
-          <a class="navbar-item" href="/popular"> 人気のSCPファイル </a>
+          <a class="navbar-item" href="/popular"> Popular SCP files </a>
 
-          <a class="navbar-item" href="/search"> 検索 </a>
+          <a class="navbar-item" href="/search"> Search </a>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> その他 </a>
+            <a class="navbar-link"> More </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="/about-scp"> SCPファイルついて </a>
-              <a class="navbar-item" href="/about"> このサイトについて </a>
-              <a class="navbar-item" href="/terms"> 利用規約 </a>
-              <a class="navbar-item" href="/privacy"> プライバシーポリシー </a>
+              <a class="navbar-item" href="/about-scp"> About SCP files </a>
+              <a class="navbar-item" href="/about"> About This site </a>
+              <a class="navbar-item" href="/terms"> Terms of use </a>
+              <a class="navbar-item" href="/privacy"> Privacy Policy </a>
               <hr class="navbar-divider" />
-              <a class="navbar-item" id="legal"> 著作権の侵害を報告 </a>
+              <a class="navbar-item" id="legal"> Report copyright infringement </a>
             </div>
           </div>
         </div>
 
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">言語 (Language)</a>
+            <a class="navbar-link">Language (言語)</a>
 
             <div class="navbar-dropdown">
               <a class="navbar-item" href="/change-language?localization=ja&returnTo={{request.url.path}}"
-                >日本語 (Japanese)</a
+                >Japanese (日本語)</a
               >
               <a class="navbar-item" href="/change-language?localization=en&returnTo={{request.url.path}}"
-                >英語 (English)</a
+                >English (英語)</a
               >
             </div>
           </div>
@@ -99,7 +99,7 @@
           {% if user is none %}
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary" href="/login"> <b> ログイン </b> </a>
+              <a class="button is-primary" href="/login"> <b> Login </b> </a>
             </div>
           </div>
           {% else %}
@@ -107,10 +107,10 @@
             <a class="navbar-link"> {{ user.name }}#{{ user.handle }} </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="/users/{{ user.id }}"> マイページ </a>
-              <a class="navbar-item" href="/upload"> SCPファイルアップロード </a>
+              <a class="navbar-item" href="/users/{{ user.id }}"> My Page </a>
+              <a class="navbar-item" href="/upload"> SCP file upload </a>
               <hr class="navbar-divider" />
-              <a class="navbar-item" href="/logout"> ログアウト </a>
+              <a class="navbar-item" href="/logout"> Logout </a>
             </div>
           </div>
           {% endif %}

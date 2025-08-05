@@ -3,7 +3,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from routes import pages
+from middleware.localization import LocalizationMiddleware
+from routes import pages, search
 from routes.api import auth, files, upload, views
 from routes.sonolus import auth as sonolusAuth
 from routes.sonolus import info as sonolusInfo
@@ -27,6 +28,8 @@ app = FastAPI(
 
 app.mount("/static", StaticFiles(directory="static"), "static")
 
+app.add_middleware(LocalizationMiddleware)
+
 app.include_router(sonolusInfo.router)
 app.include_router(sonolusAuth.router)
 app.include_router(pages.router)
@@ -34,3 +37,4 @@ app.include_router(auth.router)
 app.include_router(files.router)
 app.include_router(upload.router)
 app.include_router(views.router)
+app.include_router(search.router)

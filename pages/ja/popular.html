@@ -1,0 +1,34 @@
+{% extends "ja/base.html" %} {% set title = "人気のSCPファイル" %} {% set description =
+"人気のSCPファイルの一覧を見ることができます。" %} {% block head %} {{ super() }}
+<link rel="stylesheet" href="/static/css/index.css" />
+<script src="/static/js/popular.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">人気のSCPファイル</h1>
+    <p class="subtitle">人気のSCPファイルの一覧を見ることができます。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <div class="columns files" id="views">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button views-pagination-previous">前</button>
+        <button class="button views-pagination-next">次</button>
+      </nav>
+
+      <div class="columns files" id="downloads">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button downloads-pagination-previous">前</button>
+        <button class="button downloads-pagination-next">次</button>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

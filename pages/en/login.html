@@ -1,0 +1,53 @@
+{% extends "en/base.html" %} {% set title = "Login" %} {% set description = "Log in to SCP Uploader using your Sonolus
+account." %} {% block head %} {{ super() }}
+<script src="/static/js/login.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">Login</h1>
+    <p class="subtitle">Log in to SCP Uploader using your Sonolus account.</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div id="notifications" style="padding-bottom: 10px"></div>
+
+    <div class="content">
+      <h4>How to Login</h4>
+      <p>
+        In Sonolus, add a server with the address <code>https://scp-uploader.f5.si</code>.
+        <a href="https://open.sonolus.com/scp-uploader.f5.si">Clicking this link will add it easily.</a>
+      </p>
+      <p>Next, open the <code>SCP Uploader login server</code> and log in to that server.</p>
+      <p>Finally, an authentication code will be displayed—enter it in the field below and press the login button.</p>
+    </div>
+
+    <form class="form" id="form">
+      <div class="field">
+        <label class="label">Authentication Code</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="authCode"
+            placeholder="6 alphanumeric characters"
+            pattern="[a-zA-Z0-9]{6}"
+            minlength="6"
+            maxlength="6"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <button class="button is-primary is-fullwidth" type="submit" name="submit">Login</button>
+      </div>
+
+      <blockquote>
+        By logging into your account, you are deemed to have agreed to
+        <a href="/terms">the Terms of Service</a> of this service.
+      </blockquote>
+    </form>
+  </div>
+</div>
+{% endblock %}

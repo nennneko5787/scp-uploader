@@ -1,4 +1,4 @@
-{% extends "ja/base.html" %} {% set title = targetUser.name + "#" + targetUser.handle %} {% set description = aboutMe %}
+{% extends "en/base.html" %} {% set title = targetUser.name + "#" + targetUser.handle %} {% set description = aboutMe %}
 {% block head %} {{ super() }}
 <link rel="stylesheet" href="/static/css/user.css" />
 {% endblock %} {% block body %}
@@ -14,7 +14,7 @@
     <div class="content">
       <div class="columns">
         <div class="column is-three-quarters">
-          <h3>ファイル一覧</h3>
+          <h3>File List</h3>
           <div class="columns files">
             {% for file in files %} {% if file.public or targetUser.id == user.id %}
             <a class="column box is-half" href="/files/{{file.id}}">
@@ -40,18 +40,18 @@
           </div>
           <nav class="pagination" role="navigation" aria-label="pagination">
             <a class="button pagination-previous {% if page <= 1 %}is-disabled{%endif%}" {% if page>
-              1 %}href="?query={{query}}&page={{page-1}}"{%endif%} >前</a
+              1 %}href="?query={{query}}&page={{page-1}}"{%endif%} >Previous</a
             >
-            <a class="button pagination-next" href="?query={{query}}&page={{page+1}}">次</a>
+            <a class="button pagination-next" href="?query={{query}}&page={{page+1}}">Next</a>
           </nav>
         </div>
         <div class="column box">
           <div class="buttons">
             <a
               class="button is-x is-fullwidth"
-              href="http://twitter.com/share?url=https://scp-uploader.f5.si/users/{{targetUser.id}}&text={{targetUser.name}}#{{targetUser.handle}} さんのSCPファイルは最高です！Sonolusで遊びましょう！"
-              ><i class="fa-brands fa-x-twitter"></i> でシェア</a
-            >
+              href="http://twitter.com/share?url=https://scp-uploader.f5.si/users/{{targetUser.id}}&text={{targetUser.name}}#{{targetUser.handle}}'s SCP files are awesome! Let's play them on Sonolus!"
+              >Share on <i class="fa-brands fa-x-twitter" style="padding-left: 5px"></i
+            ></a>
           </div>
         </div>
       </div>

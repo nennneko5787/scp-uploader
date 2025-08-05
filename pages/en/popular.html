@@ -1,0 +1,34 @@
+{% extends "en/base.html" %} {% set title = "Popular SCP Files" %} {% set description = "View a list of the most popular
+SCP files." %} {% block head %} {{ super() }}
+<link rel="stylesheet" href="/static/css/index.css" />
+<script src="/static/js/popular.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">Popular SCP Files</h1>
+    <p class="subtitle">View a list of the most popular SCP files.</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <div class="columns files" id="views">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button views-pagination-previous">Previous</button>
+        <button class="button views-pagination-next">Next</button>
+      </nav>
+
+      <div class="columns files" id="downloads">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button downloads-pagination-previous">Previous</button>
+        <button class="button downloads-pagination-next">Next</button>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

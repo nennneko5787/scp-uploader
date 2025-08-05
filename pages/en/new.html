@@ -1,0 +1,26 @@
+{% extends "en/base.html" %} {% set title = "Newest SCP Files" %} {% set description = "View a list of the latest SCP
+files." %} {% block head %} {{ super() }}
+<link rel="stylesheet" href="/static/css/index.css" />
+<script src="/static/js/new.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">Newest SCP Files</h1>
+    <p class="subtitle">View a list of the latest SCP files.</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <div class="columns files" id="new">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button pagination-previous">Previous</button>
+        <button class="button pagination-next">Next</button>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

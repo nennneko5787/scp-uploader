@@ -53,12 +53,18 @@ function addTag(tagString) {
   tagsElement.append(tagElement);
 }
 
+function verified() {
+  const submitButton = document.getElementById("submit");
+  submitButton.disabled = false;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const tagInput = document.getElementById("tag");
   const submitTagButton = document.getElementById("submit-tag");
 
   const nameInput = document.getElementById("name");
   const descriptionInput = document.getElementById("description");
+  const publicCheckbox = document.getElementById("public");
   const submitButton = document.getElementById("submit");
 
   const fileInput = document.querySelector("#fileElement input[type=file]");
@@ -112,7 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("name", nameInput.value);
     formData.append("description", descriptionInput.value);
     formData.append("tags", JSON.stringify(tags));
+    formData.append("public", publicCheckbox.checked);
     formData.append("file", fileInput.files[0]);
+    formData.append("mikulen", document.querySelector('[name="cf-turnstile-response"]').value);
 
     const response = await fetch("/api/upload", { method: "POST", body: formData });
     const jsonData = await response.json();

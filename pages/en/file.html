@@ -1,4 +1,4 @@
-{% extends "ja/base.html" %} {% set title = file.name %} {% set description = file.description.replace("\r\n", "
+{% extends "en/base.html" %} {% set title = file.name %} {% set description = file.description.replace("\r\n", "
 ").replace("\r", " ").replace("\n", " ") %} {% block tags %}{{ super() }}{% for tag in file.tags %},{{tag}}{% endfor
 %}{% endblock %} {% block head %} {{ super() }}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -27,24 +27,24 @@
           </p>
           <hr />
           <div class="box">
-            <p>オリジナルのコレクション名: <code>{{file.title}}</code></p>
-            <p>ファイルサイズ: <code>{{file.size | truncate2}}MB</code></p>
+            <p>Original collection name: <code>{{file.title}}</code></p>
+            <p>File size: <code>{{file.size | truncate2}}MB</code></p>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="box buttons">
           <a class="button is-primary is-fullwidth" href="/files/{{file.id}}/download"
-            ><i class="fa-solid fa-download"></i> ダウンロード</a
+            ><i class="fa-solid fa-download"></i> Download</a
           >
           <a
             class="button is-x is-fullwidth"
-            href="http://twitter.com/share?url=https://scp-uploader.f5.si/files/{{file.id}}&text={{file.name}} というSCPファイルを発見しました！Sonolusで遊びましょう！"
-            ><i class="fa-brands fa-x-twitter"></i> でシェア</a
-          >
+            href="http://twitter.com/share?url=https://scp-uploader.f5.si/files/{{file.id}}&text=I found an SCP file called {{file.name}}! Let's play it on Sonolus!"
+            >Share on <i class="fa-brands fa-x-twitter" style="padding-left: 5px"></i
+          ></a>
           {% if user.id == file.author.id %}
           <a class="button is-info is-fullwidth" href="/files/{{file.id}}/edit"
-            ><i class="fa-solid fa-pen-to-square"></i> 編集</a
+            ><i class="fa-solid fa-pen-to-square"></i> Edit</a
           >
           {% endif %}
         </div>

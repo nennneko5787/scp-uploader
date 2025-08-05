@@ -17,7 +17,7 @@ async def adminPost(model: AddViewRequest, fileId: str):
     response = await httpx.AsyncClient().post(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         json={
-            "secret": Env.get("turnstile_secret"),
+            "secret": Env.get("ts_invisible_secret"),
             "response": model.gumimegu,
         },
     )

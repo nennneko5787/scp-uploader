@@ -1,0 +1,26 @@
+{% extends "ja/base.html" %} {% set title = "新着SCPファイル" %} {% set description =
+"新しいSCPファイルの一覧を見ることができます。" %} {% block head %} {{ super() }}
+<link rel="stylesheet" href="/static/css/index.css" />
+<script src="/static/js/new.js"></script>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-link">
+  <div class="hero-body">
+    <h1 class="title is-1">新着SCPファイル</h1>
+    <p class="subtitle">新しいSCPファイルの一覧を見ることができます。</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="content">
+      <div class="columns files" id="new">
+        <div class="spinner"></div>
+      </div>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <button class="button pagination-previous">前</button>
+        <button class="button pagination-next">次</button>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

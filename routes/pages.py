@@ -1,5 +1,4 @@
 import html
-from typing import get_args
 
 import httpx
 from fastapi import (
@@ -8,15 +7,17 @@ from fastapi import (
     Cookie,
     Depends,
     HTTPException,
+    Query,
     Request,
     Response,
 )
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from objects import Localization, User
+from objects import User, localizations
 from services.auth import verifyUser, verifyUserNoneable
 from services.db import DBService
-from services.files import fetchUser
+from services.files import fetchUser, get, getUserFilesByNewer
 
 router = APIRouter()
 templates = Jinja2Templates("pages")
@@ -36,7 +37,7 @@ def index(
     localization: str = Cookie("ja"),
     user: User = Depends(verifyUserNoneable),
 ):
-    if localization not in get_args(Localization):
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
@@ -45,22 +46,58 @@ def index(
     )
 
 
+@router.get("/new")
+def new(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/new.html", {"user": user}
+    )
+
+
+@router.get("/popular")
+def popular(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/popular.html", {"user": user}
+    )
+
+
 @router.get("/users/{userId:str}")
 async def user(
     request: Request,
     response: Response,
     userId: str,
+    page: int = Query(1, ge=1),
     localization: str = Cookie("ja"),
     user: User = Depends(verifyUserNoneable),
 ):
     targetUser = User.model_validate(await fetchUser(userId))
+    files = await getUserFilesByNewer(user=targetUser, page=page)
 
-    if localization not in get_args(Localization):
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
     return templates.TemplateResponse(
-        request, f"{localization}/user.html", {"user": user, "targetUser": targetUser}
+        request,
+        f"{localization}/user.html",
+        {"user": user, "targetUser": targetUser, "files": files, "page": page},
     )
 
 
@@ -75,7 +112,7 @@ async def file(
     file = await get(fileId)
     file.description = html.escape(file.description)
 
-    if localization not in get_args(Localization):
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
@@ -125,7 +162,7 @@ async def edit(
 ):
     file = await get(fileId)
 
-    if localization not in get_args(Localization):
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
@@ -144,7 +181,10 @@ def login(
     localization: str = Cookie("ja"),
     user: User = Depends(verifyUserNoneable),
 ):
-    if localization not in get_args(Localization):
+    if user:
+        return RedirectResponse("/")
+
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
@@ -160,10 +200,91 @@ def upload(
     localization: str = Cookie("ja"),
     user: User = Depends(verifyUser),
 ):
-    if localization not in get_args(Localization):
+    if localization not in localizations:
         localization = "ja"
         response.delete_cookie("localization")
 
     return templates.TemplateResponse(
         request, f"{localization}/upload.html", {"user": user}
     )
+
+
+@router.get("/about-scp")
+def aboutSCP(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/about-scp.html", {"user": user}
+    )
+
+
+@router.get("/about")
+def about(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/about.html", {"user": user}
+    )
+
+
+@router.get("/terms")
+def terms(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/terms.html", {"user": user}
+    )
+
+
+@router.get("/privacy")
+def privacy(
+    request: Request,
+    response: Response,
+    localization: str = Cookie("ja"),
+    user: User = Depends(verifyUserNoneable),
+):
+    if localization not in localizations:
+        localization = "ja"
+        response.delete_cookie("localization")
+
+    return templates.TemplateResponse(
+        request, f"{localization}/privacy.html", {"user": user}
+    )
+
+
+@router.get("/change-language")
+def changeLanguage(
+    localization: str = Query("ja"),
+    returnTo: str = Query("/"),
+):
+    if localization not in localizations:
+        localization = "ja"
+
+    if ":" in returnTo:
+        returnTo = "/"
+
+    response = RedirectResponse(returnTo)
+    response.set_cookie("localization", localization, max_age=60 * 60 * 24 * 365)
+
+    return response

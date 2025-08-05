@@ -15,6 +15,7 @@ class File(BaseModel):
     name: str
     description: str
     tags: List[str]
+    public: bool
     title: str
     size: float
     views: int

@@ -1,27 +1,27 @@
-{% extends "ja/base.html" %} {% set title = "ホーム" %} {% set description =
-"SCPファイルを用いて譜面やエンジンをシェア！" %} {% block head %} {{ super() }}
+{% extends "en/base.html" %} {% set title = "Home" %} {% set description = "Share charts and engines using SCP files!"
+%} {% block head %} {{ super() }}
 <link rel="stylesheet" href="/static/css/index.css" />
 <script src="/static/js/index.js"></script>
 {% endblock %} {% block body %}
 <section class="hero is-medium is-link">
   <div class="hero-body">
     <h1 class="title is-1">SCP Uploader</h1>
-    <p class="subtitle">SCPファイルを用いて譜面やエンジンをシェア！</p>
+    <p class="subtitle">Share charts and engines using SCP files!</p>
   </div>
 </section>
 
 <div class="section">
   <div class="container">
     <div class="content">
-      <h2>新着SCPファイル</h2>
+      <h2>Newest SCP Files</h2>
       <div class="columns files" id="new">
         <div class="spinner"></div>
       </div>
-      <h2>閲覧数が多いSCPファイル</h2>
+      <h2>Most Viewed SCP Files</h2>
       <div class="columns files" id="views">
         <div class="spinner"></div>
       </div>
-      <h2>ダウンロード数が多いSCPファイル</h2>
+      <h2>Most Downloaded SCP Files</h2>
       <div class="columns files" id="downloads">
         <div class="spinner"></div>
       </div>
