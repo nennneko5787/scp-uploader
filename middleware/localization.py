@@ -11,6 +11,9 @@ class LocalizationMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         acceptLang = request.headers.get("accept-language", "").lower()
+        if acceptLang == "":
+            return await call_next(request)
+
         lang = "ja" if acceptLang.startswith("ja") else "en"
 
         response = RedirectResponse(url=str(request.url))
