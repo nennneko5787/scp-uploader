@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from middleware.localization import LocalizationMiddleware
@@ -38,3 +39,8 @@ app.include_router(files.router)
 app.include_router(upload.router)
 app.include_router(views.router)
 app.include_router(search.router)
+
+
+@app.get("/favicon.ico")
+def faviconIco():
+    return FileResponse("favicon.ico")
