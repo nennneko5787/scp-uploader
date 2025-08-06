@@ -147,7 +147,7 @@ async def download(
         )
         return Response(
             response.content,
-            media_type="application/x-sonolus-collection-package",
+            media_type="application/octet-stream",
             headers={"Content-Disposition": f'attachment; filename="{file.id}.scp"'},
         )
 
