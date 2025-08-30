@@ -69,6 +69,7 @@ async def upload(
 
     fileContent = BytesIO(await file.read())
     title = await asyncio.to_thread(zipProcess, fileContent)
+    fileContent.seek(0)
 
     fileId = uuid.uuid4()
 

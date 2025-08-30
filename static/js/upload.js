@@ -103,15 +103,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (nameInput.value == "" || descriptionInput == "" || fileInput.files.length <= 0) {
       alert(localizationTable["form.draft"][COOKIES.getCookie("localization", "ja")]);
+      return;
     }
 
-    const sizeInMB = fileInput.files[0] / (1024 * 1024);
+    const sizeInMB = fileInput.files[0].size / (1024 * 1024);
     if (sizeInMB > 20) {
       alert(localizationTable["file.sizeOver"][COOKIES.getCookie("localization", "ja")]);
+      return;
     }
 
     if (!fileInput.files[0].name.endsWith(".scp")) {
       alert(localizationTable["file.mustBeSCP"][COOKIES.getCookie("localization", "ja")]);
+      return;
     }
 
     const formData = new FormData();
